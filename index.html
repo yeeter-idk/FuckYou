@@ -7,9 +7,40 @@
   <meta property="og:image" content="https://yeeter-idk.github.io/FuckYou/fuckYouSmall.jpg"/>
   <meta property="og:url" content=""/>
   <title>Fuck You</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 </head>
 <body>
   <image src="fuckYou.jpg" style="width: 100%;">
-  <script>let wait = setTimeout(() => alert("Fuck You"), 2000);</script>
+  <p>Do you think it's not deserved? Click this to send it back to them:</p>
+  <button id="nativeShareBtn">Share</button>
+    
+  <script>
+let wait = setTimeout(() => alert("Fuck You"), 2000);
+    
+// Data object containing the text and URL to share
+const shareData = {
+  title: document.title,                 // Grabs current page title
+  text: 'Check out this awesome website!',// Custom description
+  url: "https://yeeter-idk.github.io/FuckYou/"             // Grabs current page URL
+};
+
+const shareButton = document.getElementById('nativeShareBtn');
+
+// Add a click event listener to activate the share card
+shareButton.addEventListener('click', async () => {
+  // Check if the browser supports the native Web Share API
+  if (navigator.share) {
+    try {
+      await navigator.share(shareData);
+      console.log('Content shared successfully!');
+    } catch (err) {
+      console.error('Sharing failed or was cancelled:', err);
+    }
+  } else {
+    navigator.clipboard.writeText("https://yeeter-idk.github.io/FuckYou/");
+  }
+});
+
+  </script>
 </body>
 </html>
